@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member List</title>
+    <style>
+        .table {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1> 고객 명단 </h1>
+    <hr>
+    <table class="table">
+        <colgroup>
+            <col width="100px" height="30px" style="background: #ffffff" />
+            <col width="300px" height="30px" style="background: #eeeeee" />
+            <col width="400px" height="30px" style="background: #999999" />
+        </colgroup>
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>주소</th>
+        </tr>
+ 
+        <tr th:each="member : ${memberList}">
+            <td th:text="${member.id}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.addr}"></td>
+        </tr>
+    </table>
+</body>
+</html>
