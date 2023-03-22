@@ -1,12 +1,12 @@
-package com.jjang051.ch04;
+package com.jjang051.jsp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Ch04Application {
+public class JspApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Ch04Application.class, args);
+    SpringApplication.run(JspApplication.class, args);
   }
 }

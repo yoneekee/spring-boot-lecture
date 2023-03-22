@@ -1,11 +1,31 @@
+# 서버 포트 설정
 server: 
   port: 9090
 
+# 스프링 로그 예쁘게 /  오라클 ojdbc 설정
 spring:
   output:
     ansi:
       enabled: always
-      
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: YONEE001
+    password: 0000
+
+# 디버깅 레벨
 logging:
   level:
-    '[com.jjang051.ch04]':  DEBUG
+    root: DEBUG     
+    '[com.jjang051.ch04]':  DEBUG 
+#logging:
+#  level:
+#    '[com.jjang051.ch04]':  DEBUG
+
+
+# 마이바티스
+mybatis:
+  mapper-locations: classpath:sqlmapper/**/*.xml # sqlmapper밑에 있는 모든 폴더와 그 밑의 xml 파일들
+
+
+
