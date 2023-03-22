@@ -11,6 +11,7 @@
     <title>Layout</title>
 </head>
 <body>
+
     <header id="header">
         <div class="container">
             <h1>로고</h1>
@@ -23,7 +24,13 @@
             </nav>
         </div>
     </header>
-    
+
+    <!--
+    <header th:replace="/fragments/header" :: header>
+         여기에 fragments에 있는 거 들고옴
+    </header>
+    -->
+
     <!-- 여기만 바뀜 -->
     <main id="main" >
         <div class="container" layout:fragment="contents">
