@@ -3,27 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjang051.ch04.dao.BoardDao">
-  <select id="getAllBoard" resultType="com.jjang051.ch04.dto.BoardDto">
+  <select id="getAllBoard" resultType="BoardDto">
     SELECT * FROM BOARD03
   </select>
   
-  <select id="getOneBoard" resultType="com.jjang051.ch04.dto.BoardDto">
+  <select id="getOneBoard" resultType="BoardDto">
     SELECT * FROM BOARD03 WHERE no = #{no}
   </select>
 
-  <insert id="insertBoard" parameterType="com.jjang051.ch04.dto.BoardDto">
+  <insert id="insertBoard" parameterType="BoardDto">
     INSERT INTO BOARD03 VALUES (BOARD03_SEQ.NEXTVAL,
                                                     #{userName},
                                                     #{subject},
                                                     #{contents},
-                                                    SYSDATE,0)
+                                                    SYSDATE, 0)
   </insert>
 
   <update id="updateHit" parameterType="Integer">
 		UPDATE BOARD03 SET HIT = HIT + 1 WHERE NO = #{no}
 	</update>
 
-	<update id="updateBoard" parameterType="com.jjang051.ch04.dto.BoardDto">
+	<update id="updateBoard" parameterType="BoardDto">
 		UPDATE BOARD03 SET 
     USERNAME = #{userName}, SUBJECT = #{subject}, CONTENTS = #{contents} 
 		WHERE NO = #{no}

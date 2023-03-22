@@ -14,6 +14,7 @@ spring:
     url:  jdbc:oracle:thin:@localhost:1521:xe
     username: "YONEE001"
     password: "0000"
+    
 
 #로그 찍기    
 logging:
@@ -22,5 +23,5 @@ logging:
 
 #mybatis 설정
 mybatis:
-  mapper-locations: classpath:sqlmapper/**/*.xml
-
+  mapper-locations: classpath:sqlmapper/mapper/**/*.xml
+  config-location: classpath:sqlmapper/config/config.xml

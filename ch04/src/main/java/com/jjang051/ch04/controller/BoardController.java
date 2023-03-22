@@ -4,8 +4,6 @@ import com.jjang051.ch04.dto.BoardDto;
 import com.jjang051.ch04.service.BoardService;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,14 +41,7 @@ public class BoardController {
   }
 
   @GetMapping("/view")
-  public String view(
-    Model model,
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws IOException {
-    request.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;charset=UTF-8");
-    int no = Integer.parseInt(request.getParameter("no"));
+  public String view(Model model, int no) throws IOException {
     log.info("no : {}", no);
     BoardDto boardDto = boardService.getOneBoard(no);
     boardService.updateHit(no);
@@ -59,14 +50,7 @@ public class BoardController {
   }
 
   @GetMapping("/update")
-  public String update(
-    Model model,
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws IOException {
-    request.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;charset=UTF-8");
-    int no = Integer.parseInt(request.getParameter("no"));
+  public String update(Model model, int no) {
     log.info("no : {}", no);
     BoardDto boardDto = boardService.getOneBoard(no);
     model.addAttribute("boardDto", boardDto);
@@ -74,28 +58,14 @@ public class BoardController {
   }
 
   @PostMapping("/updateProcess")
-  public String updateProcess(
-    BoardDto boardDto,
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws IOException {
-    request.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;charset=UTF-8");
-    int no = Integer.parseInt(request.getParameter("no"));
+  public String updateProcess(BoardDto boardDto, int no) {
     log.info("updateProcess no : {}", no);
     boardService.updateBoard(boardDto);
     return "redirect:/board/view?no=" + no;
   }
 
   @GetMapping("/delete")
-  public String delete(
-    Model model,
-    HttpServletRequest request,
-    HttpServletResponse response
-  ) throws IOException {
-    request.setCharacterEncoding("UTF-8");
-    response.setContentType("text/html;charset=UTF-8");
-    int no = Integer.parseInt(request.getParameter("no"));
+  public String delete(Model model, int no) {
     log.info("no : {}", no);
     boardService.deleteBoard(no);
     return "redirect:/board/list";
