@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIEW List</title>
+    <style>
+        .table {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1> Board List </h1>
+    <hr>
+    <table class="table">
+    <tr>
+        <td style="width:20%; background-color:#ffffff">번호</td>
+        <td>[[${boardDto.no}]]</td>
+    </tr>
+      <tr>
+        <td style="width:20%; background-color:#eeeeee">이름</td>
+        <td>[[${boardDto.userName}]]</td>
+      </tr>
+      <tr>
+        <td style="width:20%; background-color:#eeeeee">제목</td>
+        <td>[[${boardDto.subject}]]</td>
+      </tr>
+      <tr>
+        <td style="width:20%; background-color:#eeeeee">게시일</td>
+        <td>[[${boardDto.regDate}]]</td>
+      </tr>
+      <tr>
+        <td style="width:20%; background-color:#eeeeee">조회수</td>
+        <td>[[${boardDto.hit}]]</td>
+      </tr>
+      <tr>
+        <td style="width:20%; background-color:#eeeeee">내용</td>
+        <td>[[${boardDto.contents}]]</td>
+      </tr>
+    </table>
+    <a th:href="@{/board/update(no = ${boardDto.no})}"><button>수정하기</button></a>
+    <a href="/board/list"><button>리스트로 돌아가기</button></a>
+</body>
+</html>

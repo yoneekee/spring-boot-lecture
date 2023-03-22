@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board List</title>
+    <style>
+        .table {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1> Board List </h1>
+    <hr>
+    <table class="table">
+        <colgroup>
+            <col width="100px" height="30px" style="background: #ffffff" />
+            <col width="300px" height="30px" style="background: #eeeeee" />
+            <col width="400px" height="30px" style="background: #999999" />
+            <col width="200px" height="30px" style="background: #eeeeee" />
+            <col width="50px" height="30px" style="background: #999999" />
+        </colgroup>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>조회수</th>
+        </tr>
+ 
+        <tr th:each="board : ${boardList}">
+            <td><a th:href="@{/board/view(no = ${board.no})}">[[${board.no}]]</a></td>
+            <td th:text="${board.userName}"></td>
+            <td th:text="${board.subject}"></td>
+            <td th:text="${board.regDate}"></td>
+            <td th:text="${board.hit}"></td>
+        </tr>
+
+    </table>
+</body>
+</html>

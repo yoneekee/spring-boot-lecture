@@ -3,6 +3,6 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.project.sourcePaths": [
-       
+        "ch04/src/main/java/com/jjang051/ch04"
     ]
 }
