@@ -28,4 +28,8 @@
     USERNAME = #{userName}, SUBJECT = #{subject}, CONTENTS = #{contents} 
 		WHERE NO = #{no}
 	</update>
+
+  <delete id="deleteBoard" parameterType="Integer">
+    DELETE FROM BOARD03 WHERE no = #{no}
+  </delete>
 </mapper>

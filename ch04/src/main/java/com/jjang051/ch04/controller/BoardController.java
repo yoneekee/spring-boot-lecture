@@ -53,6 +53,7 @@ public class BoardController {
     int no = Integer.parseInt(request.getParameter("no"));
     log.info("no : {}", no);
     BoardDto boardDto = boardService.getOneBoard(no);
+    boardService.updateHit(no);
     model.addAttribute("boardDto", boardDto);
     return "board/view";
   }
@@ -74,7 +75,6 @@ public class BoardController {
 
   @PostMapping("/updateProcess")
   public String updateProcess(
-    Model model,
     BoardDto boardDto,
     HttpServletRequest request,
     HttpServletResponse response
@@ -82,8 +82,22 @@ public class BoardController {
     request.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;charset=UTF-8");
     int no = Integer.parseInt(request.getParameter("no"));
-    log.info("no : {}", no);
+    log.info("updateProcess no : {}", no);
     boardService.updateBoard(boardDto);
     return "redirect:/board/view?no=" + no;
+  }
+
+  @GetMapping("/delete")
+  public String delete(
+    Model model,
+    HttpServletRequest request,
+    HttpServletResponse response
+  ) throws IOException {
+    request.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html;charset=UTF-8");
+    int no = Integer.parseInt(request.getParameter("no"));
+    log.info("no : {}", no);
+    boardService.deleteBoard(no);
+    return "redirect:/board/list";
   }
 }

@@ -36,4 +36,12 @@ public class BoardService {
   public void updateBoard(BoardDto boardDto) {
     boardDao.updateBoard(boardDto);
   }
+
+  public void deleteBoard(int no) {
+    boardDao.deleteBoard(no);
+  }
+
+  public void updateHit(int no) {
+    boardDao.updateHit(no);
+  }
 }

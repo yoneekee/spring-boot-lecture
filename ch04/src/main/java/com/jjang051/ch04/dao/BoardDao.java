@@ -13,4 +13,8 @@ public interface BoardDao {
   public BoardDto getOneBoard(int no);
 
   public void updateBoard(BoardDto boardDto);
+
+  public void deleteBoard(int no);
+
+  public void updateHit(int no);
 }
