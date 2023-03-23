@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjang051.replyboard.dao.ReplyBoardDao">
+
+  <select id="getSelectedBoard" resultType="ReplyBoardDto" parameterType="Integer">
+    select * from replyboard where no = #{no}
+  </select>
+
+  <select id="getAllReplyBoard" resultType="ReplyBoardDto">
+    select rownum as num, b. * from (
+      (select * from replyboard order by regroup desc, relevel asc) b
+    )
+  </select>
+
+  <select id="getMaxReGroup" resultType="Integer">
+    SELECT NVL(MAX(REGROUP),0) AS MAXREGROUP FROM REPLYBOARD
+  </select>
+  
+  <update id="updateHit" parameterType="Integer">
+		UPDATE REPLYBOARD SET HIT = HIT + 1 WHERE NO = #{no}
+	</update>
+
+  <insert id="insertReplyBoard" parameterType="ReplyBoardDto">
+    INSERT INTO REPLYBOARD VALUES (
+                                    REPLYBOARD_SEQ.NEXTVAL,
+                                    #{subject},
+                                    #{name},
+                                    #{password},
+                                    SYSDATE,
+                                    #{contents},
+                                    1,
+                                    #{reGroup},
+                                    #{reLevel} + 1,                  
+                                    #{reStep} + 1,                      
+                                    0
+                                  )
+  </insert>
+  <insert id="insertBoard" parameterType="ReplyBoardDto">
+    INSERT INTO REPLYBOARD VALUES (
+                                    REPLYBOARD_SEQ.NEXTVAL,
+                                    #{subject},
+                                    #{name},
+                                    #{password},
+                                    SYSDATE,
+                                    #{contents},
+                                    1,
+                                    #{reGroup},                                                            
+                                    #{reLevel},                                                                                    
+                                    #{reStep},                                                                                    
+                                    0
+                                  )
+  </insert>
+
+  <delete id="deleteReplyBoard" parameterType="Integer">
+    DELETE FROM REPLYBOARD WHERE NO = #{NO}
+  </delete>
+
+  <update id="modifyBoard" parameterType="ReplyBoardDto">
+    UPDATE REPLYBOARD SET 
+    SUBJECT=#{subject}, 
+    NAME=#{name}, 
+    PASSWORD=#{password},
+    CONTENTS=#{contents} 
+    WHERE NO = #{no}
+  </update>
+</mapper>

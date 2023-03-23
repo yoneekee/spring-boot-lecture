@@ -15,30 +15,38 @@ public class ReplyBoardService {
   ReplyBoardDao replyBoardDao;
 
   public ReplyBoardService() {
-    log.info("= === = === = REPLY BOARD SERVICE = === = === =");
+    log.info("===============ReplyBoardService===========");
   }
 
   public List<ReplyBoardDto> getAllReplyBoard() {
     return replyBoardDao.getAllReplyBoard();
   }
 
-  public ReplyBoardDto getOneReplyBoard(int no) {
-    return replyBoardDao.getOneReplyBoard(no);
+  public int insertBoard(ReplyBoardDto replyBoardDto) {
+    return replyBoardDao.insertBoard(replyBoardDto);
   }
 
   public int insertReplyBoard(ReplyBoardDto replyBoardDto) {
     return replyBoardDao.insertReplyBoard(replyBoardDto);
   }
 
-  public int getMaxRegroup() {
-    return replyBoardDao.getMaxRegroup();
+  public int getMaxReGroup() {
+    return replyBoardDao.getMaxReGroup();
+  }
+
+  public ReplyBoardDto getSelectedBoard(int no) {
+    return replyBoardDao.getSelectedBoard(no);
+  }
+
+  public int deleteReplyBoard(int no) {
+    return replyBoardDao.deleteReplyBoard(no);
   }
 
   public int updateHit(int no) {
     return replyBoardDao.updateHit(no);
   }
 
-  public int deleteReplyBoard(int no) {
-    return replyBoardDao.deleteReplyBoard(no);
+  public int modifyBoard(ReplyBoardDto replyBoardDto) {
+    return replyBoardDao.modifyBoard(replyBoardDto);
   }
 }

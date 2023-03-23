@@ -6,14 +6,14 @@
   <body>
     <div class="container" id="contents" layout:fragment="contents">
       <h2 class="mt-5 mb-3 m">게시판</h2>
-      <form action="/board/writeProcess" method="POST" class="mt-5">
+      <form th:action="@{/board/modifyProcess(no = ${boardDto.no})}" method="POST" class="mt-5">
         <div class="mb-3">
           <label for="" class="form-label">제목</label>
-          <input type="text" class="form-control" id="" placeholder="제목" name="subject" />
+          <input type="text" class="form-control" id="" th:placeholder="${boardDto.subject}" name="subject" />
         </div>
         <div class="mb-3">
           <label for="" class="form-label">글쓴이</label>
-          <input type="text" class="form-control" id="" placeholder="글쓴이" name="name" />
+          <input type="text" class="form-control" id="" th:placeholder="${boardDto.name}" name="name" />
         </div>
 
         <div class="mb-3">
@@ -22,9 +22,10 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label">내용</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="contents"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="contents" th:placeholder="${boardDto.contents}"></textarea>
         </div>
         <div class="mt-5 text-center">
+          <input type="hidden" value="${boardDto.no}" name="no" />
           <button type="submit" class="btn btn-primary btn-lg">확인</button>
           <button type="reset" class="btn btn-secondary btn-lg">취소</button>
         </div>

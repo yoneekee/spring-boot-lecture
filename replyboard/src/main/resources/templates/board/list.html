@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout.html}">
   <head>
-    <title>게시판</title>
+    <title>LIST</title>
   </head>
   <body>
-    <div class="container" id="contents" layout:fragment="contents">
-      <h2 class="mt-5 mb-3">게시판</h2>
-
-      <table class="table table-striped mt-5 text-center">
+    <div layout:fragment="contents">
+      <h2 class="mt-5 mb-3 m">게시판</h2>
+      <table class="table table-striped mt-5">
         <colgroup>
-          <col style="width: 10%" />
-          <col style="width: 20%" />
-          <col style="width: 20%" />
-          <col style="width: 40%" />
-          <col style="width: 10%" />
+          <col style="width: 50px; text-align: center" />
+          <col style="text-align: left" />
+          <col style="width: 120px; text-align: center" />
+          <col style="width: 200px; text-align: center" />
+          <col style="width: 50px; text-align: center" />
         </colgroup>
-        <tr>
-          <th style="background-color: #6f6f6f; color: #fff">no</th>
-          <th style="background-color: #6f6f6f; color: #fff">name</th>
-          <th style="background-color: #6f6f6f; color: #fff">subject</th>
-          <th style="background-color: #6f6f6f; color: #fff">regdate</th>
-          <th style="background-color: #6f6f6f; color: #fff">hit</th>
-        </tr>
-        <tr th:each="replyBoard : ${replyBoardList}">
-          <td>[[${replyBoard.no}]]</td>
-          <td th:text="${replyBoard.name}"></td>
-          <td><a th:href="@{/board/view(no = ${replyBoard.realNo})}">[[${replyBoard.subject}]]</a></td>
-          <td th:text="${replyBoard.regDate}"></td>
-          <td th:text="${replyBoard.hit}"></td>
-        </tr>
+        <thead>
+          <tr>
+            <th scope="col">no</th>
+            <th scope="col">subject</th>
+            <th scope="col">writer</th>
+            <th scope="col">date</th>
+            <th scope="col">hit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${boardList}">
+            <td scope="row" th:text="${item.no}">1</td>
+            <td class="space1" th:class="'space'+${item.reStep}">
+              <a th:href="@{/board/view(no=${item.no})}" th:text="${item.subject}" href="view.html"> 제목이 들어갑니다. </a>
+            </td>
+            <td th:text="${item.name}">글쓴 사람 이름</td>
+            <td th:text="${item.regDate}">2023.03.23</td>
+            <td th:text="${item.hit}">1</td>
+          </tr>
+        </tbody>
       </table>
-      <a href="/board/write"><button class="btn btn-primary">글 작성하기</button></a>
+      <div class="center">
+        <a href="/board/write"><button class="btn btn-primary btn-lg mt-3">글 작성하기</button></a>
+      </div>
     </div>
   </body>
 </html>

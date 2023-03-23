@@ -4,6 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias type="com.jjang051.replyboard.dto.ReplyBoardDto" alias="ReplyBoardDto" />
+    <typeAlias alias="ReplyBoardDto" type="com.jjang051.replyboard.dto.ReplyBoardDto" />
   </typeAliases>
 </configuration>

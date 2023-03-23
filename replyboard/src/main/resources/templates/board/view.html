@@ -15,33 +15,41 @@
 
         <tr>
           <th>제목</th>
-          <td>[[${replyBoardDto.subject}]]</td>
+          <td>[[${boardDto.subject}]]</td>
         </tr>
 
         <tr>
           <th>이름</th>
-          <td>[[${replyBoardDto.name}]]</td>
+          <td>[[${boardDto.name}]]</td>
         </tr>
 
         <tr>
           <th>조회수</th>
-          <td>[[${replyBoardDto.hit}]]</td>
+          <td>[[${boardDto.hit}]]</td>
         </tr>
 
         <tr>
           <th>날짜</th>
-          <td>[[${replyBoardDto.regDate}]]</td>
+          <td>[[${boardDto.regDate}]]</td>
         </tr>
 
         <tr style="height: 100px; vertical-align: middle">
           <th>내용</th>
-          <td>[[${replyBoardDto.contents}]]</td>
+          <td>[[${boardDto.contents}]]</td>
         </tr>
       </table>
-      <a th:href="@{/board/delete(no = ${replyBoardDto.no})}"><button class="btn btn-danger">삭제하기</button></a>
-      <a th:href="@{/board/update(no = ${replyBoardDto.no})}"><button class="btn btn-primary">수정하기</button></a>
-      <a href="/board/list"><button class="btn btn-secondary">리스트로 돌아가기</button></a>
-      <a th:href="@{/board/reply(no = ${replyBoardDto.no})}"><button class="btn btn-info col-2">답글쓰기</button></a>
+      <div class="btns">
+        <div>
+          <a th:href="@{/board/delete(no = ${boardDto.no})}"><button class="btn btn-danger mt-1 mx-1">삭제하기</button></a>
+          <a th:href="@{/board/modify(no = ${boardDto.no})}"><button class="btn btn-primary mt-1 mx-1">수정하기</button></a>
+        </div>
+        <div>
+          <a href="/board/list"><button class="btn btn-secondary mt-1 mx-1">리스트로 돌아가기</button></a>
+          <a th:href="@{/board/reply(no = ${boardDto.no}, reGroup=${boardDto.reGroup}, reLevel=${boardDto.reLevel}, reStep=${boardDto.reStep})}">
+            <button class="btn btn-info mt-1 mx-1">답글쓰기</button>
+          </a>
+        </div>
+      </div>
     </div>
   </body>
 </html>
