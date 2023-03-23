@@ -23,7 +23,7 @@
     )
 	</select>
 
-   <select id="getOneReplyBoard" resultType="ReplyBoardDto">
+   <select id="getOneReplyBoard" resultType="ReplyBoardDto" parameterType="Integer">
 		SELECT * FROM REPLYBOARD WHERE no = #{no}
 	</select>
 
@@ -49,7 +49,7 @@
 		UPDATE REPLYBOARD SET HIT = HIT + 1 WHERE NO = #{no}
 	</update>
 
-	<delete id="deleteReplyBoard">
+	<delete id="deleteReplyBoard" parameterType="Integer">
     DELETE FROM REPLYBOARD WHERE NO = #{NO}
   </delete>
 </mapper>

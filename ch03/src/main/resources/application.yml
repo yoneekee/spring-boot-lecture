@@ -1,11 +1,11 @@
-server: 
+server:
   port: 9090
 
 spring:
   output:
     ansi:
       enabled: always
-      
+
 logging:
   level:
-    '[com.jjang051.ch03]':  DEBUG
+    "[com.jjang051.ch03]": DEBUG

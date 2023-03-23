@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout.html}">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>나는 인덱스</title>
   </head>
   <body>
-    <h1>Home</h1>
-    <hr />
-    <a href="/board/list">게시판 이동</a>
+    <div layout:fragment="contents">
+      <h1 class="mt-5 mb-3">Home</h1>
+      <hr />
+      <a href="/board/list">게시판 이동</a>
+    </div>
   </body>
 </html>

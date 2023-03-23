@@ -5,28 +5,31 @@
   </head>
   <body>
     <div class="container" id="contents" layout:fragment="contents">
-      <h2 class="mt-5 mb-3">게시판</h2>
+      <h2 class="mt-5 mb-3">'[[${replyBoardDto.subject}]]'에 대한 답글 작성</h2>
 
-      <form action="/board/writeProcess" method="POST" class="mt-5">
+      <form th:action="@{/board/replyWriteProcess(no = ${replyBoardDto.no})}" method="POST" class="mt-5">
+        <input type="hidden" name="reGroup" value="${replyBoardDto.reGroup}" />
+        <input type="hidden" name="reLevel" value="${replyBoardDto.reLevel}" />
+        <input type="hidden" name="reStep" value="${replyBoardDto.reStep}" />
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">제목</label>
+          <label for="exampleFormControlInput1" class="form-label">답글 제목</label>
           <input type="text" class="form-control" placeholder="제목을 입력하세요" name="subject" />
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">작성자</label>
+          <label for="exampleFormControlInput1" class="form-label">답글 작성자</label>
           <input type="text" class="form-control" placeholder="작성자명을 입력하세요" name="name" />
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">비밀번호</label>
+          <label for="exampleFormControlInput1" class="form-label">답글 비밀번호</label>
           <input type="password" class="form-control" placeholder="비밀번호를 입력하세요" name="password" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">내용</label>
-          <textarea class="form-control" id="" rows="5" placeholder="내용을 입력하세요" name="contents"></textarea>
+          <label for="" class="form-label">답글 내용</label>
+          <textarea class="form-control" id="" rows="5" placeholder="내용을 입력하세요" name="contents" th:placeholder="${replyBoardDto.contents}"></textarea>
         </div>
 
         <div class="button text-center">
-          <button class="btn btn-primary btn-lg mt-3" type="submit">작성하기</button>
+          <button class="btn btn-primary btn-lg mt-3" type="submit">답글달기</button>
           <button class="btn btn-secondary btn-lg mt-3" type="reset">취소</button>
           <a href="/board/list"><button type="button" class="btn btn-secondary btn-lg mt-3">리스트로 돌아가기</button></a>
         </div>
