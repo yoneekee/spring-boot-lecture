@@ -1,0 +1,16 @@
+body {
+  font-family: "Noto Sans KR";
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    font-weight: 600;
+    color: rgb(21, 177, 177);
+  }
+}
+
+#contents {
+  min-height: 500px;
+}
