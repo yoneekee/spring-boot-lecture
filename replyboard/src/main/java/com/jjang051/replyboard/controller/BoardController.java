@@ -41,6 +41,14 @@ public class BoardController {
   @PostMapping("/replyProcess")
   public String replyWriteProcess(ReplyBoardDto replyBoardDto) {
     replyBoardService.insertReplyBoard(replyBoardDto);
+    replyBoardService.updateRelevel(replyBoardDto);
+    return "redirect:/board/list";
+  }
+
+  @PostMapping("/reply2Process")
+  public String reply2WriteProcess(ReplyBoardDto replyBoardDto) {
+    replyBoardService.updateRelevel(replyBoardDto);
+    replyBoardService.insertReplyBoard(replyBoardDto);
     return "redirect:/board/list";
   }
 
@@ -48,6 +56,41 @@ public class BoardController {
   public String list(Model model) {
     List<ReplyBoardDto> boardList = replyBoardService.getAllReplyBoard();
     model.addAttribute("boardList", boardList);
+    return "/board/list";
+  }
+
+  @GetMapping("/modifyPwdCheck")
+  public String modifyPwdCheck(int no, String operation, Model model) {
+    ReplyBoardDto replyBoardDto = replyBoardService.getSelectedBoard(no);
+    model.addAttribute("boardDto", replyBoardDto);
+    model.addAttribute("operation", operation);
+    log.info("============== oparation : " + operation);
+    return "/board/modifyPwdCheck";
+  }
+
+  @PostMapping("/modifyPwdCheckProcess")
+  public String modifyPwdCheckProcess(
+    ReplyBoardDto replyBoardDto,
+    String operation,
+    HttpServletResponse response,
+    Model model
+  ) throws IOException {
+    log.info("operation ::::::::: " + operation);
+    log.info("replyBoardDto ::::::::: " + replyBoardDto.getNo());
+    ReplyBoardDto replyCheckBoardDto = replyBoardService.modifyPwdCheck(
+      replyBoardDto
+    );
+    if (replyCheckBoardDto == null) {
+      ScriptWriter.alertAndBack(response, "비밀번호가 옳지 않습니다");
+    } else if (replyCheckBoardDto != null) {
+      model.addAttribute("boardDto", replyCheckBoardDto);
+      model.addAttribute("no", replyCheckBoardDto.getNo());
+      if (operation.equals("modify")) {
+        return "/board/modify";
+      } else if (operation.equals("delete")) {
+        return "redirect:/board/delete?no=" + replyCheckBoardDto.getNo();
+      }
+    }
     return "/board/list";
   }
 

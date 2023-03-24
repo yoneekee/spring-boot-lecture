@@ -49,4 +49,12 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
   public int modifyBoard(ReplyBoardDto replyBoardDto) {
     return replyBoardDao.modifyBoard(replyBoardDto);
   }
+
+  public int updateRelevel(ReplyBoardDto replyBoardDto) {
+    return replyBoardDao.updateRelevel(replyBoardDto);
+  }
+
+  public ReplyBoardDto modifyPwdCheck(ReplyBoardDto replyBoardDto) {
+    return replyBoardDao.modifyPwdCheck(replyBoardDto);
+  }
 }

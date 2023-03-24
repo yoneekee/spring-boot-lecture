@@ -13,5 +13,7 @@ public interface ReplyBoardDao {
   int insertReplyBoard(ReplyBoardDto replyBoardDto);
   int deleteReplyBoard(int no);
   int updateHit(int no);
+  int updateRelevel(ReplyBoardDto replyBoardDto);
   int modifyBoard(ReplyBoardDto replyBoardDto);
+  ReplyBoardDto modifyPwdCheck(ReplyBoardDto replyBoardDto);
 }

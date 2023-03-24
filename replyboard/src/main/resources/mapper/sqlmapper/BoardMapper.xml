@@ -5,17 +5,42 @@
 <mapper namespace="com.jjang051.replyboard.dao.ReplyBoardDao">
 
   <select id="getSelectedBoard" resultType="ReplyBoardDto" parameterType="Integer">
-    select * from replyboard where no = #{no}
+    select * from replyboard where no = #{no} 
   </select>
 
   <select id="getAllReplyBoard" resultType="ReplyBoardDto">
-    select rownum as num, b. * from (
-      (select * from replyboard order by regroup desc, relevel asc) b
-    )
+      SELECT 
+        ROWNUM as num,
+        a.no,
+        a.subject,
+        a.name,
+        a.password,
+        a.regdate,
+        a.contents,
+        a.available,
+        a.regroup,
+        a.relevel,
+        a.restep,
+        a.hit
+    FROM 
+    (SELECT no, 
+    CASE 
+            WHEN available = 0 THEN '삭제된 글입니다.'
+            WHEN available = 1 THEN subject
+    END AS subject, name, password, regdate, 
+    contents, available, regroup, relevel, restep, hit FROM REPLYBOARD
+    order by regroup desc, relevel asc) a 
+    <!--select rownum as num, b. * from (
+      (select * from replyboard where AVAILABLE = 1 order by regroup desc, relevel asc) b  
+    )-->
   </select>
 
   <select id="getMaxReGroup" resultType="Integer">
     SELECT NVL(MAX(REGROUP),0) AS MAXREGROUP FROM REPLYBOARD
+  </select>
+
+  <select id="modifyPwdCheck" resultType="ReplyBoardDto">
+    SELECT * FROM REPLYBOARD WHERE NO = #{no} AND PASSWORD = #{password}
   </select>
   
   <update id="updateHit" parameterType="Integer">
@@ -53,9 +78,11 @@
                                   )
   </insert>
 
-  <delete id="deleteReplyBoard" parameterType="Integer">
-    DELETE FROM REPLYBOARD WHERE NO = #{NO}
-  </delete>
+  <update id="deleteReplyBoard" parameterType="Integer">
+    UPDATE REPLYBOARD SET
+    AVAILABLE = 0
+    WHERE NO = #{NO} <!--, PASSWORD = #{PASSWORD} -->
+  </update>
 
   <update id="modifyBoard" parameterType="ReplyBoardDto">
     UPDATE REPLYBOARD SET 
@@ -64,5 +91,11 @@
     PASSWORD=#{password},
     CONTENTS=#{contents} 
     WHERE NO = #{no}
+  </update>
+
+  <update id="updateRelevel" parameterType="ReplyBoardDto">
+    UPDATE REPLYBOARD SET
+    RELEVEL = RELEVEL + 1
+    WHERE REGROUP = #{reGroup} AND  RELEVEL  <![CDATA[ > ]]> #{reLevel} 
   </update>
 </mapper>

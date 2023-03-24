@@ -40,8 +40,8 @@
       </table>
       <div class="btns">
         <div>
-          <a th:href="@{/board/delete(no = ${boardDto.no})}"><button class="btn btn-danger mt-1 mx-1">삭제하기</button></a>
-          <a th:href="@{/board/modify(no = ${boardDto.no})}"><button class="btn btn-primary mt-1 mx-1">수정하기</button></a>
+          <a th:href="@{/board/modifyPwdCheck(no = ${boardDto.no}, operation='delete')}"><button class="btn btn-danger mt-1 mx-1">삭제하기</button></a>
+          <a th:href="@{/board/modifyPwdCheck(no = ${boardDto.no}, operation='modify')}"><button class="btn btn-primary mt-1 mx-1">수정하기</button></a>
         </div>
         <div>
           <a href="/board/list"><button class="btn btn-secondary mt-1 mx-1">리스트로 돌아가기</button></a>
