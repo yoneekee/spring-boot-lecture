@@ -75,8 +75,6 @@ public class BoardController {
     HttpServletResponse response,
     Model model
   ) throws IOException {
-    log.info("operation ::::::::: " + operation);
-    log.info("replyBoardDto ::::::::: " + replyBoardDto.getNo());
     ReplyBoardDto replyCheckBoardDto = replyBoardService.modifyPwdCheck(
       replyBoardDto
     );
