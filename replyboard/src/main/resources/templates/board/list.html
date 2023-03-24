@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr th:each="item : ${boardList}">
-            <td scope="row">[[${item.no}]]<span th:value="${item.available}"></span></td>
+            <td scope="row">[[${item.no}]]</td>
             <td class="space1" th:class="'space'+${item.reStep}">
               <a th:href="${item.available == 1 ? '/board/view?no=' + item.no : 'javascript:void(0)'}" th:styleappend="${item.available == 1 ? '' : 'color: #b384f5;'}" th:text="${item.subject}" href="view.html" class="cursorSubject"> 제목이 들어갑니다. </a>
             </td>
