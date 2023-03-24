@@ -3,11 +3,9 @@ package com.jjang051.replyboard.controller;
 import com.jjang051.replyboard.dto.ReplyBoardDto;
 import com.jjang051.replyboard.service.ReplyBoardService;
 import com.jjang051.replyboard.util.ScriptWriter;
-
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,12 +82,15 @@ public class BoardController {
   }
 
   @PostMapping("/modifyProcess")
-  public void modifyProcess(ReplyBoardDto replyBoardDto, HttpServletResponse response) throws IOException {
+  public void modifyProcess(
+    ReplyBoardDto replyBoardDto,
+    HttpServletResponse response
+  ) throws IOException {
     replyBoardService.modifyBoard(replyBoardDto);
     ScriptWriter.alertAndNext(
       response,
       "정말로 수정하시겠습니까",
-      "/board/view?no="+replyBoardDto.getNo()
+      "/board/view?no=" + replyBoardDto.getNo()
     );
   }
 }
