@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+                xmlns:th="http://www.thymeleaf.org" 
+                layout:decorate="~{/layout/layout.html}">
+<head>
+  <title>BOARD WRITE</title>
+</head>
+<body>
+  <div class="container" id="contents" layout:fragment="contents">
+    <h2>LIST</h2>
+    <!-- <p th:text="${msg}">메세지 출력하는 곳</p> -->
+    <table class="table table-striped">
+      <colgroup>
+        <col style="width:50px">
+        <col>
+        <col style="width:200px">
+        <col style="width:200px">
+        <col style="width:50px">
+      </colgroup>
+      <thead>
+        <tr class="text-center">
+          <th scope="col">NO</th>
+          <th scope="col">SUBJECT</th>
+          <th scope="col">WRITER</th>
+          <th scope="col">DATE</th>
+          <th scope="col">HIT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item : ${boardList}" class="text-center">
+          <th th:text="${item.no}">1</th>
+          <td class="text-start ps-sm-5">
+            <a th:text="${item.subject}" href="/board/view" 
+            th:href="@{/board/view(no=${item.no})}">아버지를 아버지라 부르지 못하고...</a>
+          </td>
+          <td th:text="${item.writer}">홍길동</td>
+          <td th:text="${item.regDate}">2023.03.25</td>
+          <td th:text="${item.hit}">1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+</body>
+</html>

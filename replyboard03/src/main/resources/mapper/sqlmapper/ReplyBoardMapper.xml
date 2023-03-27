@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjang051.replyboard03.dao.ReplyBoardDao">
+  <insert id="insertBoard" parameterType="ReplyBoardDto">
+    INSERT INTO REPLYBOARD03 VALUES (
+      REPLYBOARD03_SEQ.NEXTVAL,
+      #{subject},
+      #{writer},
+      #{password},
+      SYSDATE,
+      #{contents},
+      1,
+      #{reGroup},
+      #{reLevel},
+      #{reStep},
+      0
+    )
+  </insert>
+
+  <select id="getAllBoardList" resultType="ReplyBoardDto">
+    SELECT * FROM REPLYBOARD03
+  </select>
+
+  <select id="getSelectOne" resultType="ReplyBoardDto" parameterType="Integer">
+    SELECT * FROM REPLYBOARD03 WHERE NO = #{no}
+  </select>
+
+  <update id="updateHit" parameterType="Integer">
+    UPDATE REPLYBOARD03 SET HIT = HIT + 1 WHERE NO = #{no}
+  </update>
+</mapper>
