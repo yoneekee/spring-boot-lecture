@@ -18,16 +18,42 @@
       0
     )
   </insert>
-
+  <insert id="insertReplyBoard" parameterType="ReplyBoardDto">
+    INSERT INTO REPLYBOARD03 VALUES (
+      REPLYBOARD03_SEQ.NEXTVAL,
+      #{subject},
+      #{writer},
+      #{password},
+      SYSDATE,
+      #{contents},
+      1,
+      #{reGroup},
+      #{reLevel},
+      #{reStep},
+      0
+    )
+  </insert>
   <select id="getAllBoardList" resultType="ReplyBoardDto">
-    SELECT * FROM REPLYBOARD03
+    <!-- SELECT * FROM REPLYBOARD03 -->
+    SELECT ROWNUM AS NUM, B.* from
+      ( SELECT * FROM REPLYBOARD03 ORDER BY REGROUP DESC, RELEVEL ASC ) B
   </select>
 
   <select id="getSelectOne" resultType="ReplyBoardDto" parameterType="Integer">
     SELECT * FROM REPLYBOARD03 WHERE NO = #{no}
   </select>
 
+  <select id="getMaxReGroup" resultType="Integer">
+    SELECT NVL(MAX(REGROUP),1) AS REGROUPMAX FROM REPLYBOARD03
+  </select>
+
   <update id="updateHit" parameterType="Integer">
     UPDATE REPLYBOARD03 SET HIT = HIT + 1 WHERE NO = #{no}
   </update>
+
+  <update id="updateReLevel" parameterType="ReplyBoardDto">
+    UPDATE REPLYBOARD03 SET RELEVEL = RELEVEL + 1 
+    WHERE REGROUP = #{reGroup} AND RELEVEL                    <![CDATA[ > ]]> #{reLevel}
+  </update>
+
 </mapper>

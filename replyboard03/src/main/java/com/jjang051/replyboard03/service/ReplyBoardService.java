@@ -11,4 +11,10 @@ public interface ReplyBoardService {
   public ReplyBoardDto getSelectOne(int no);
 
   public int updateHit(int no);
+
+  public int getMaxReGroup();
+
+  public int insertReplyBoard(ReplyBoardDto replyBoardDto);
+
+  public int updateReLevel(ReplyBoardDto replyBoardDto);
 }

@@ -10,4 +10,7 @@ public interface ReplyBoardDao {
   List<ReplyBoardDto> getAllBoardList();
   ReplyBoardDto getSelectOne(int no);
   int updateHit(int no);
+  int getMaxReGroup();
+  int insertReplyBoard(ReplyBoardDto replyBoardDto);
+  int updateReLevel(ReplyBoardDto replyBoardDto);
 }

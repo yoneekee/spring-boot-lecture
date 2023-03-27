@@ -16,4 +16,5 @@ public class ReplyBoardDto {
   private int reLevel;
   private int reStep;
   private int hit;
+  private int num; // ROWNUM 용 property
 }

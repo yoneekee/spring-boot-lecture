@@ -19,6 +19,10 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
   }
 
   public int insertBoard(ReplyBoardDto replyBoardDto) {
+    replyBoardDto.setReGroup(getMaxReGroup() + 1);
+    replyBoardDto.setReLevel(1);
+    replyBoardDto.setReStep(1);
+
     int result = replyBoardDao.insertBoard(replyBoardDto);
     return result;
   }
@@ -38,5 +42,34 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
   public int updateHit(int no) {
     int result = replyBoardDao.updateHit(no);
     return result;
+  }
+
+  @Override
+  public int getMaxReGroup() {
+    int result = replyBoardDao.getMaxReGroup();
+    return result;
+  }
+
+  @Override
+  public int insertReplyBoard(ReplyBoardDto replyBoardDto) {
+    int reGroup = replyBoardDto.getReGroup();
+    int reLevel = replyBoardDto.getReLevel();
+    int reStep = replyBoardDto.getReStep();
+
+    updateReLevel(replyBoardDto);
+
+    replyBoardDto.setReGroup(reGroup);
+    replyBoardDto.setReLevel(reLevel + 1);
+    replyBoardDto.setReStep(reStep + 1);
+
+    int result = replyBoardDao.insertReplyBoard(replyBoardDto);
+
+    // db에가서 나보다 레벨이 높은 애들은 전부 1증가
+
+    return result;
+  }
+
+  public int updateReLevel(ReplyBoardDto replyBoardDto) {
+    return replyBoardDao.updateReLevel(replyBoardDto);
   }
 }
