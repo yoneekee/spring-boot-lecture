@@ -3,6 +3,7 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.project.sourcePaths": [
-        
+        "replyboard03/src/main/java/com/jjang051/replyboard03"
     ]
 }
+
