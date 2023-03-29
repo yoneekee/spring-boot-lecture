@@ -99,7 +99,7 @@
       </div>
     </div>
   </div>
-  <!-- 글 삭제 수정 후 뜨는 MODAL : START -->
+  <!-- 글 삭제 수정 후 뜨는 MODAL : END -->
   
   <script th:inline="javascript">
     /*<![CDATA[*/
@@ -109,9 +109,11 @@
       const memoModal = new bootstrap.Modal("#memoModal");
       const deleteModal = new bootstrap.Modal("#deleteModal");
       
-      if(msg){
+      if(msg){ 
+        // 글이 등록되면 컨트롤러에서 msg flash로 쏴줌
         memoModal.show();
       }
+      
       $("#btnDeleteAjax").on("click",function(e){
         //e.preventDefault();
         deleteModal.show();
