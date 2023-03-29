@@ -85,8 +85,23 @@ public class ReplyBoardServiceImpl implements ReplyBoardService {
     return result;
   }
 
-  public List<ReplyBoardDto> getSearchBoardList(String searchTxt) {
-    List<ReplyBoardDto> boardList = replyBoardDao.getSearchBoardList(searchTxt);
-    return boardList;
+  // public List<ReplyBoardDto> getSearchBoardList(String searchTxt) {
+  //   List<ReplyBoardDto> boardList = replyBoardDao.getSearchBoardList(searchTxt);
+  //   return boardList;
+  // }
+
+  public int modifyReplyBoard(ReplyBoardDto replyBoardDto) {
+    int result = replyBoardDao.modifyReplyBoard(replyBoardDto);
+    return result;
+  }
+
+  public ReplyBoardDto getNextSelect(int num) {
+    ReplyBoardDto replyBoardDto = replyBoardDao.getNextSelect(num);
+    return replyBoardDto;
+  }
+
+  public ReplyBoardDto getPrevSelect(int num) {
+    ReplyBoardDto replyBoardDto = replyBoardDao.getPrevSelect(num);
+    return replyBoardDto;
   }
 }

@@ -9,12 +9,15 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ReplyBoardDao {
   int insertBoard(ReplyBoardDto replyBoardDto);
   List<ReplyBoardDto> getAllBoardList(HashMap<String, Object> hashMap);
-  List<ReplyBoardDto> getSearchBoardList(String searchTxt);
+  // List<ReplyBoardDto> getSearchBoardList(String searchTxt);
   ReplyBoardDto getSelectOne(int no);
   int updateHit(int no);
   int getMaxReGroup();
   int insertReplyBoard(ReplyBoardDto replyBoardDto);
   int updateReLevel(ReplyBoardDto replyBoardDto);
   int deleteReplyBoard(ReplyBoardDto replyBoardDto);
+  int modifyReplyBoard(ReplyBoardDto replyBoardDto);
+  ReplyBoardDto getPrevSelect(int num);
+  ReplyBoardDto getNextSelect(int num);
   // List<ReplyBoardDto> searchReplyBoard(String searchTxt);
 }

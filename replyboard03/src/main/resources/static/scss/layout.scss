@@ -10,7 +10,12 @@ a {
 }
 table{
   .contents {
-    min-height: 300px !important;
+    min-height: 300px;
+    white-space: pre-wrap;
+  }
+  .th {
+    width:200px;
+    background-color: #f8f8f8;
   }
 } 
 
@@ -34,5 +39,58 @@ table{
   padding-left: 60px;
 }
 
+#searchForm {
+  padding:0 150px;
+  display: flex;
+  select {
+    flex-basis: 200px;
+  }
+  input {
+    flex-grow: 1;
+    margin: 0 10px;
+  }
+  button {
+    flex-basis:150px;
+  }
+}
+
+a.none {
+  pointer-events: none;
+}
+
+.prevAndNext {
+  display: flex;
+  flex-direction: column;
+  div{
+    padding:20px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    &:nth-child(1) {
+      border-top: 1px solid #ccc;
+    }
+    span {
+      flex-basis: 200px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    a {
+      flex-grow: 1;
+    }
+  }
+}
 
 
+// #searchForm {
+//   padding:0 100px;
+//   display: flex;
+//   select {
+//     flex-basis: 200px;
+//   }
+//   input {
+//     flex-grow: 1;
+//     margin: 0 10px;
+//   }
+//   button {
+//     flex-basis: 150px;
+//   }
+// }
