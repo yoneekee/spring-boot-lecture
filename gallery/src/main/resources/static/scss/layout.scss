@@ -40,3 +40,36 @@ li {
     }
   }
 }
+
+.replyBox {
+  padding : 20px 15px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin : 10px 10px 10px 20px;
+  }
+
+  .replyList{
+    background-color: #d3f4e3;
+    padding: 10px 40px;
+    margin : 0 auto;
+    li {
+      margin-top: 10px;
+    }
+  }
+
+  .replyDelete {
+    color:rgb(184, 58, 58);
+    position:absolute;
+    right : 120px;
+    cursor: pointer;
+  }
+
+  .replyIdx {
+    background-color: #fffeee;
+    font-weight: 700;
+    padding:2px 4px;
+    margin-right : 25px;
+  }
+}

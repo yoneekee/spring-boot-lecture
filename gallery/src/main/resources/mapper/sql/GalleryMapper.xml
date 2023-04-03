@@ -26,9 +26,11 @@
       #{comments}
     )
   </insert>
+  <select id="getAllReply" resultType="ReplyDto" parameterType="Integer">
+    SELECT * FROM GALLERY_COMMENT WHERE GALLERYID = #{galleryId}
+  </select>
 
-
-
-
-
+  <delete id="deleteReply">
+    DELETE FROM GALLERY_COMMENT WHERE NO = #{no} 
+  </delete>
 </mapper>

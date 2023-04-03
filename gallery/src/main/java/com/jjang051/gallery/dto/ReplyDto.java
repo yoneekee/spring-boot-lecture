@@ -1,4 +1,4 @@
-package com.jjang051.gallery.dao;
+package com.jjang051.gallery.dto;
 
 import lombok.Data;
 

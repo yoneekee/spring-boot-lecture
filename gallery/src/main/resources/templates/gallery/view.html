@@ -20,17 +20,15 @@
           <p class="card-text" th:text="${galleryDto.contents}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           <!-- <span class="btn btn-primary w-100 btn-lg">LINK</span> -->
           <div class="replyBox">
-              <ul>
-                <li>댓글이 출력됩니다.</li>
-                <li>댓글이 출력됩니다.</li>
-                <li>댓글이 출력됩니다.</li>
-                <li>댓글이 출력됩니다.</li>
+              <h3>댓글</h3>
+              <ul class="replyList">
+               
               </ul>
           </div>
           <hr>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Please Write Reply</label>
-            <textarea class="form-control reply" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <div class="mb-3"></div>
+            <textarea class="form-control reply" id="exampleFormControlTextarea1" rows="3"
+            placeholder="댓글을 입력하세요."></textarea>
             <hr>
             <div class="btns text-end">
               <button class="btn btn-primary" id="btnConfirm">CONFIRM</button>
@@ -44,22 +42,78 @@
     </div>
   </div>
   
-  <script>
-    $("#btnConfirm").on("click", function() {
+  <script th:inline="javascript">
+    const galleryId = [[${galleryDto.no}]];
+    console.log("gallery ID : " + galleryId);
+    
+    
+    function loadReply() {
       const sendData = {
-        galleryId : 1,
-        comments : $(".reply").val()
+        galleryId:galleryId,
+      }  
+      $.ajax({
+        url:"/getReply/" + galleryId,
+        data:sendData,
+        type:"POST",
+        success:function(response) {
+          console.log(response);
+          let tempHtml="";
+          $.each(response,function(idx,item){
+            tempHtml+=`<li> <span class="replyIdx">${idx+1}</span> ${item.comments} 
+              <a class="replyDelete" data-comment-id="${item.no}" value="${item.no}">X</a></li>`
+          });
+          $(".replyBox ul").html(tempHtml);
+        }
+      })
+    }
+    loadReply();
+    
+    $("#btnConfirm").on("click",function(){
+      const sendData = {
+        galleryId:galleryId,
+        comments:$(".reply").val()
       }
       $.ajax({
         url:"/insertReply",
         data:sendData,
         type:"POST",
-        success : function(response) {
-          console.log(response);
-          
+        success:function(response) {
+          //console.log(response);
+          let tempHtml="";
+          $.each(response,function(idx,item){
+            tempHtml+=`<li> <span class="replyIdx">${idx+1}</span> ${item.comments} 
+              <a class="replyDelete" data-comment-id="${item.no}" value="${item.no}">X</a></li>`
+          });
+          $(".replyBox ul").html(tempHtml);
+          $("#exampleFormControlTextarea1").val('');
         }
       })
     });
+    
+    $(document).on("click", ".replyDelete", function() {
+      const commentNo = $(this).data('comment-id');
+      console.log(commentNo);
+      const sendData = {
+        galleryId:galleryId,
+        no:commentNo
+      }
+      $.ajax({
+        url:"/deleteReply",
+        data:sendData,
+        type:"POST",
+        success:function(response) {
+          //console.log(response);
+          let tempHtml="";
+          $.each(response,function(idx,item){
+            tempHtml+=`<li> <span class="replyIdx">${idx+1}</span> ${item.comments} 
+              <a class="replyDelete" data-comment-id="${item.no}" value="${item.no}">X</a></li>`
+          });
+          $(".replyBox ul").html(tempHtml);
+        }
+      })
+    });
+
+    
   </script>
   
   

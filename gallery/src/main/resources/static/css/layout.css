@@ -33,3 +33,32 @@ li {
 .list.gallery li a {
   text-decoration: none;
 }
+
+.replyBox {
+  padding: 20px 15px;
+}
+.replyBox h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px 10px 10px 20px;
+}
+.replyBox .replyList {
+  background-color: #d3f4e3;
+  padding: 10px 40px;
+  margin: 0 auto;
+}
+.replyBox .replyList li {
+  margin-top: 10px;
+}
+.replyBox .replyDelete {
+  color: rgb(184, 58, 58);
+  position: absolute;
+  right: 120px;
+  cursor: pointer;
+}
+.replyBox .replyIdx {
+  background-color: #fffeee;
+  font-weight: 700;
+  padding: 2px 4px;
+  margin-right: 25px;
+}
