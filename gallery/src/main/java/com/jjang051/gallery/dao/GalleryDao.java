@@ -12,4 +12,8 @@ public interface GalleryDao {
 
   //@Select("SELECT * FROM GALLERY ORDER BY GALLERY")
   List<GalleryDto> getAllList();
+
+  GalleryDto viewGallery(int no);
+
+  int insertReply(ReplyDto replyDto);
 }

@@ -5,5 +5,6 @@
 <configuration>
   <typeAliases>
     <typeAlias alias="GalleryDto" type="com.jjang051.gallery.dto.GalleryDto" />
+    <typeAlias alias="ReplyDto" type="com.jjang051.gallery.dto.ReplyDto" />
   </typeAliases>
 </configuration>

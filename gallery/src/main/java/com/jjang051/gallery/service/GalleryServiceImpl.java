@@ -1,6 +1,7 @@
 package com.jjang051.gallery.service;
 
 import com.jjang051.gallery.dao.GalleryDao;
+import com.jjang051.gallery.dao.ReplyDto;
 import com.jjang051.gallery.dto.GalleryDto;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -48,5 +49,17 @@ public class GalleryServiceImpl implements GalleryService {
   public List<GalleryDto> getAllList() {
     List<GalleryDto> galleryList = galleryDao.getAllList();
     return galleryList;
+  }
+
+  @Override
+  public GalleryDto viewGallery(int no) {
+    GalleryDto galleryDto = galleryDao.viewGallery(no);
+    return galleryDto;
+  }
+
+  @Override
+  public int insertReply(ReplyDto replyDto) {
+    int result = galleryDao.insertReply(replyDto);
+    return result;
   }
 }

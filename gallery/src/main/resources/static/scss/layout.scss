@@ -9,3 +9,34 @@
     box-shadow: 0 10px 10px rgba(0,0,0,0.1);
   }
 }
+
+li {
+  list-style: none;
+}
+
+.view {
+  &.gallery {
+    width:640px;
+    margin: 100px auto;
+    .card {
+      padding:20px;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+}
+.list {
+  &.gallery {
+    width:640px;
+    margin: 100px auto;
+    li {
+      .card {
+        padding:20px;
+      }
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

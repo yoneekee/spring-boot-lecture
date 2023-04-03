@@ -1,15 +1,21 @@
 package com.jjang051.gallery.controller;
 
+import com.jjang051.gallery.dao.ReplyDto;
 import com.jjang051.gallery.dto.GalleryDto;
 import com.jjang051.gallery.service.GalleryService;
 import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@Log4j2
 public class GalleryController {
 
   @Autowired
@@ -18,6 +24,7 @@ public class GalleryController {
   @GetMapping({ "/", "/list" })
   public String list(Model model) {
     List<GalleryDto> galleryList = galleryService.getAllList();
+    log.info(galleryList);
     model.addAttribute("galleryList", galleryList);
     return "/gallery/list";
   }
@@ -31,5 +38,23 @@ public class GalleryController {
   public String insertProcess(GalleryDto galleryDto) {
     galleryService.insertGallery(galleryDto);
     return "redirect:/";
+  }
+
+  @GetMapping("/view/{no}")
+  public String view(@PathVariable("no") int no, Model model) {
+    GalleryDto galleryDto = galleryService.viewGallery(no);
+    model.addAttribute("galleryDto", galleryDto);
+    return "/gallery/view";
+  }
+
+  @PostMapping("/insertReply")
+  @ResponseBody
+  public String insertReply(ReplyDto replyDto) {
+    int result = galleryService.insertReply(replyDto);
+    if (result > 0) {
+      return "ok";
+    } else {
+      return "fail";
+    }
   }
 }

@@ -16,8 +16,19 @@
   <select id="getAllList" resultType="GalleryDto">
     SELECT * FROM GALLERY ORDER BY NO
   </select>
-
-  <select id="viewGallery" resultType="GalleryDto">
-    SELECT * FROM GALLERY WHERE NO = #{NO}
+  <select id="viewGallery" resultType="GalleryDto" parameterType="Integer">
+    SELECT * FROM GALLERY WHERE NO = #{no}
   </select>
+  <insert id="insertReply" parameterType="ReplyDto">
+    insert into gallery_comment values (
+      GALLERY_COMMENT_SEQ.NEXTVAL,
+      #{galleryId},
+      #{comments}
+    )
+  </insert>
+
+
+
+
+
 </mapper>
