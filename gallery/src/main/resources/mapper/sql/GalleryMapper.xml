@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjang051.gallery.dao.GalleryDao">
+  <insert id="insertGallery" parameterType="GalleryDto">
+    INSERT INTO GALLERY VALUES (
+      GALLERY_SEQ.NEXTVAL,
+      #{title},
+      #{contents},
+      #{original},
+      #{renamed},
+      0
+    )
+  </insert>
+  <select id="getAllList" resultType="GalleryDto">
+    SELECT * FROM GALLERY ORDER BY NO
+  </select>
+
+  <select id="viewGallery" resultType="GalleryDto">
+    SELECT * FROM GALLERY WHERE NO = #{NO}
+  </select>
+</mapper>
