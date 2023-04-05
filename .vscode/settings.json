@@ -3,7 +3,8 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.project.sourcePaths": [
-        "gallery/src/main/java/com/jjang051/gallery"
+        "gallery/src/main/java/com/jjang051/gallery",
+        "todo/src/main/java/com/jjang051/todo"
     ],
     "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable"
 }

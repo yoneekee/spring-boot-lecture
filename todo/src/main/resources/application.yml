@@ -1,0 +1,43 @@
+#server port
+server: 
+  port: 9093
+
+#spring setting
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url:  jdbc:oracle:thin:@localhost:1521:xe
+    username: "YONEE001"
+    password: "0000"
+    
+  # thymeleaf:
+  #   cache: false
+  
+  servlet:  
+    multipart:  
+      max-file-size:  10MB
+      max-request-size: 100MB
+
+  # autoconfigure:  
+  #   exclude:  org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
+
+logging:
+  level:
+    root: INFO
+    '[com.jjang051.todo]': DEBUG
+
+mybatis:
+  mapper-locations: classpath:mapper/sql/**/*.xml
+  config-location: classpath:mapper/config/config.xml
+
+#나는 세팅 모든게 다 세팅
+
+file:
+  path: C:/gallery/upload/
+
+
+
+

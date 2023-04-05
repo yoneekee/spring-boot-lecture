@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"      rel="stylesheet">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/lightpick.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/lightpick.js"></script>
+  
+</head>
+<body>
+  <header class="header">TODO</header>
+  <div class="wrap">
+    <div class="input-group mb-2">
+      <input type="text" class="form-control" placeholder="날짜를 선택해 주세요." id="datepicker" />
+    </div>
+   
+    
+    <div class="inputBox input-group">
+        <input type="text" class="form-control todo" placeholder="해야할 일을 입력하세요.">
+        <button class="btn btn-primary" type="button" id="button-addon2">
+          <span class="material-icons">add</span>
+        </button>
+    </div>
+    
+    <div class="todoListBox">
+      <ul class="todoList">
+        <li>
+          <span class="txt">점심먹기</span>
+          <button>DONE</button>
+          <button>DEL</button>
+        </li>
+        <li>
+          <span class="txt">점심먹기</span>
+          <button>DONE</button>
+          <button>DEL</button>
+        </li>
+        <li>
+          <span class="txt">점심먹기</span>
+          <button>DONE</button>
+          <button>DEL</button>
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="footer">      
+      <p>
+        all coyrights reserved by jjang051
+      </p>
+    </footer>
+  </div>
+  
+  <script>
+    const picker = new Lightpick({ 
+      field: document.querySelector("#datepicker"),
+      format:"YYYY/MM/DD",
+      onSelect:function(date){
+        loadData();
+      }
+    });
+    
+    picker.setDate(new Date());
+    loadData();
+    
+    function makeList(array) {
+      console.log(array);
+      let tempHtml="";
+      $.each(array,function(idx,item){
+        tempHtml+=
+        `<li class="${item.done==1?"done":""}"   data-no="${item.no}">
+          <span class="txt">${item.todo}</span>
+          <button class="btnDone"><span class="material-icons">done</span></button>
+          <button class="btnDelete"><span class="material-icons">delete</span></button>
+        </li>`
+      })
+    $(".todoList").html(tempHtml);
+    }
+    
+    function loadData(){
+      //picker.setDate(new Date());
+      //picker.setDate(date);
+      const sendData  = {
+          pickedDate:$("#datepicker").val()
+        }
+      $.ajax({
+        url:"/list",
+        type:"GET",
+        data:sendData,
+        success:function(response){
+          makeList(response);
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+    }
+    
+    
+    $(".inputBox .btn").on("click",function(){
+      
+      const sendData  = {
+        todo:$(".inputBox .todo").val(),
+        done:0,
+        pickedDate:$("#datepicker").val()
+      }
+      $.ajax({
+        url:"/insert",
+        type:"POST",
+        data:sendData,
+        success:function(response){
+          makeList(response);
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+      $(".todo").val("");
+    });
+    $(".todoList").on("click","li .btnDone",function(){
+      const clickedLi = $(this).parent();
+      const state = clickedLi.hasClass("done") ? 0 : 1;
+      const sendData  = {
+        no:parseInt($(this).parent().data("no")),
+        done:state
+      }
+      $.ajax({
+        url:"/update",
+        type:"POST",
+        data:sendData,
+        success:function(response){
+          if(response.result>0) {
+            if(clickedLi.hasClass("done")) {
+              clickedLi.removeClass("done");
+            } else {
+              clickedLi.addClass("done");
+            }
+          }
+        },
+        error:function(err) {
+          console.log(err)
+        }
+      })
+    })
+    
+    $(".todoList").on("click","li .btnDelete",function(){
+      const clickedLi = $(this).parent();
+      const sendData  = {
+        no:parseInt($(this).parent().data("no")),
+        //pickedDate:"20230404"
+      }
+      $.ajax({
+        url:"/delete",
+        type:"POST",
+        data:sendData,
+        success:function(response){
+          //makeList(response);
+          console.log(response);
+          if(response.result>0) {
+            gsap.to(clickedLi,{opacity:0,onComplete:function(){
+              const nextItems =  clickedLi.nextAll();
+              //console.log(nextItems);
+              gsap.to(nextItems,{y:-51,onComplete:function(){
+                console.log(nextItems);
+                $(".todoList li").removeAttr("style");
+                clickedLi.remove();
+              }});
+            }})
+          }
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+    });
+  </script>
+  
+  
+</body>
+</html>
