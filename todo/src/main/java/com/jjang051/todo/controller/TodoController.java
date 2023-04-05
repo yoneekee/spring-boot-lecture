@@ -36,7 +36,7 @@ public class TodoController {
   @PostMapping("/insert")
   @ResponseBody
   public List<TodoDto> insertTodo(TodoDto todoDto) {
-    int result = todoService.insertTodo(todoDto);
+    //int result = todoService.insertTodo(todoDto);
     List<TodoDto> todoList = todoService.getAllTodo(todoDto.getPickedDate());
     return todoList;
   }

@@ -1,6 +1,6 @@
 #server port
 server: 
-  port: 9093
+  port: 9092
 
 #spring setting
 spring:
@@ -12,6 +12,16 @@ spring:
     url:  jdbc:oracle:thin:@localhost:1521:xe
     username: "YONEE001"
     password: "0000"
+    
+  jpa:
+    open-in-view: true
+    show-sql: true
+    database: oracle
+    database-platform:  org.hibernate.dialect.Oracle10gDialect
+    hibernate:
+      ddl-auto: update   #create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     
   # thymeleaf:
   #   cache: false
@@ -29,9 +39,9 @@ logging:
     root: INFO
     '[com.jjang051.todo]': DEBUG
 
-mybatis:
-  mapper-locations: classpath:mapper/sql/**/*.xml
-  config-location: classpath:mapper/config/config.xml
+# mybatis:
+#   mapper-locations: classpath:mapper/sql/**/*.xml
+#   config-location: classpath:mapper/config/config.xml
 
 #나는 세팅 모든게 다 세팅
 

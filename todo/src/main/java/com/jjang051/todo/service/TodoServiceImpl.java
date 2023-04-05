@@ -4,7 +4,7 @@ import com.jjang051.todo.dao.TodoDao;
 import com.jjang051.todo.dto.TodoDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
